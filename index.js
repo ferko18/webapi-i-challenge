@@ -14,9 +14,7 @@ server.get("/", (req, res) => {
   res.send("wellcome to port 4000");
 });
 
-server.listen(4000, () => {
-  console.log("\n*** Running on port 4000 ***\n");
-});
+
 
 
 //GET users
@@ -85,3 +83,6 @@ server.delete("/api/users/:id", (req, res) => {
     });
 });
 
+server.listen(4000, () => {
+  console.log("\n*** Runnin on port 4000 ***\n");
+});
