@@ -43,23 +43,21 @@ server.post("/api/users", (req, res) => {
 });
 
 
-// server.post("/api/users", (req, res) => {
-//   const { name, bio } = req.body;
-//   const newUser = req.body;
-//   if (!name || !bio) {
-//     return res
-//       .status(400)
-//       .json({ errorMessage: "Please provide name and bio for the user." });
-//   }
 
-//   db.insert(newUser)
-//     .then(user => {
-//       res.status(201).json({ success: true, user });
-//     })
-//     .catch(err => {
-//       res.status(500).json({
-//         success: false,
-//         error: "There was an error while saving the user to the database"
-//       });
-//     });
-// });
+//PUT (update )
+
+server.put("/api/users/:id", (req, res)=>{
+  //id and object needed 
+  const id = req.params.id;
+  const changes = req.body;
+  db.update(id, changes)
+  .then(updatedUser=>{
+    if(!updatedUser){return res.status(404).json({error:'The user with specified id does not esist' })}
+    else {
+      res.status(201).json(changes)
+    }
+  }
+    ).catch(err =>
+      res.status(500).json({ error: "could not be modified" }))
+
+})
